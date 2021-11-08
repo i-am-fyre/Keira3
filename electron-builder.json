@@ -1,5 +1,5 @@
 {
-  "productName": "Keira3",
+  "productName": "Keira3-Mangos",
   "asarUnpack": [
     "dist/assets/sqlite.db"
   ],
@@ -22,27 +22,27 @@
     "!tsconfig.json",
     "!tslint.json"
   ],
-  "win": {
-    "icon": "dist",
-    "target": [
-      "portable"
-    ]
-  },
-  "mac": {
-    "icon": "dist",
-    "target": [
-      "dmg"
-    ]
-  },
+  // "win": {
+  //   "icon": "dist",
+  //   "target": [
+  //     "portable"
+  //   ]
+  // },
+  // "mac": {
+  //   "icon": "dist",
+  //   "target": [
+  //     "dmg"
+  //   ]
+  // },
   "linux": {
     "icon": "dist",
     "category": "Development",
     "target": [
-      "AppImage",
+      // "AppImage",
       "deb",
-      "snap",
-      "rpm",
-      "AppImage"
+      // "snap",
+      // "rpm",
+      // "AppImage"
     ]
   }
 }

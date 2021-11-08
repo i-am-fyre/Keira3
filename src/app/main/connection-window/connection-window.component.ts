@@ -36,9 +36,9 @@ export class ConnectionWindowComponent extends SubscriptionHandler implements On
     this.form = new FormGroup<any>({
       host: new FormControl<any>('127.0.0.1'),
       port: new FormControl<any>(3306),
-      user: new FormControl<any>('root'),
-      password: new FormControl<any>('root'),
-      database: new FormControl<any>('acore_world'),
+      user: new FormControl<any>('mangos'),
+      password: new FormControl<any>('mangos'),
+      database: new FormControl<any>('mangos_world'),
     });
 
     this.configs = this.connectionWindowService.getConfigs();

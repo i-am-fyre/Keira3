@@ -1,8 +1,8 @@
 {
-  "name": "Keira3",
+  "name": "Keira3-MaNGOS",
   "version": "3.3.0",
-  "description": "Database Editor for AzerothCore",
-  "homepage": "https://github.com/AzerothCore/Keira3",
+  "description": "Database Editor for MaNGOS",
+  "homepage": "",
   "author": {
     "name": "Francesco Borzi'",
     "email": "borzifrancesco@gmail.com",

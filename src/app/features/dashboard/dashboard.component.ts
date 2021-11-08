@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MysqlQueryService } from '../../shared/services/mysql-query.service';
-import { VersionDbRow, VersionRow } from '@keira-types/general';
+import { VersionRow } from '@keira-types/general';
 import packageInfo from '../../../../package.json';
 import { AC_FORUM_URL, PAYPAL_DONATE_URL, KEIRA3_REPO_URL, AC_DISCORD_URL } from '@keira-constants/general';
 import { SubscriptionHandler } from '@keira-shared/utils/subscription-handler/subscription-handler';
@@ -33,12 +33,11 @@ export class DashboardComponent extends SubscriptionHandler implements OnInit {
   }
 
   ngOnInit() {
-    this.getCoreVersion();
-    this.getWorldDbVersion();
+    this.getDatabaseVersion();
   }
 
-  private getCoreVersion(): void {
-    const query = 'SELECT * FROM version';
+  private getDatabaseVersion(): void {
+    const query = 'SELECT version,structure,content FROM db_version ORDER BY VERSION DESC, structure DESC, content DESC LIMIT 0,1';
 
     this.subscriptions.push(
       this.queryService.query<VersionRow>(query).subscribe(
@@ -46,9 +45,9 @@ export class DashboardComponent extends SubscriptionHandler implements OnInit {
           if (data && data.length > 0) {
             this.coreVersions = data[0];
 
-            if (!this.coreVersions.db_version.startsWith('ACDB') || !this.coreVersions.core_version.startsWith('AzerothCore')) {
-              this.error = true;
-            }
+            // if (!this.coreVersions.db_version.startsWith('ACDB') || !this.coreVersions.core_version.startsWith('AzerothCore')) {
+            //   this.error = true;
+            // }
           } else {
             console.error(`Query ${query} produced no results: ${data}`);
           }
@@ -59,29 +58,5 @@ export class DashboardComponent extends SubscriptionHandler implements OnInit {
         },
       ),
     );
-  }
-
-  private getWorldDbVersion() {
-    const query = 'SELECT * FROM version_db_world';
-    this.subscriptions.push(
-      this.queryService.query<VersionDbRow>(query).subscribe(
-        (data) => {
-          if (data && data.length > 0) {
-            const keys = Object.keys(data[0]);
-            this.dbWorldVersion = keys[2];
-          } else {
-            console.error(`Query ${query} produced no results: ${data}`);
-          }
-        },
-        (error) => {
-          this.error = true;
-          console.error(error);
-        },
-      ),
-    );
-  }
-
-  getCommit(hash: string) {
-    return `https://github.com/azerothcore/azerothcore-wotlk/commit/${hash}`;
   }
 }

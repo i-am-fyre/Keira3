@@ -9,8 +9,7 @@ declare type Config = Partial<ConnectionConfig>;
 
 describe('ConnectionWindowService', () => {
   const currentConfig: Config[] = [
-    { host: '185.251.90.84', port: 3306, user: 'readonly', password: 'cmVhZG9ubHk=', database: 'world' },
-    { host: '127.0.0.1', port: 3306, user: 'root', password: 'cm9vdA==', database: 'acore_world' },
+    { host: '127.0.0.1', port: 3306, user: 'mangos', password: 'mangos', database: 'mangos_world' },
   ];
   Object.freeze(currentConfig);
 
@@ -39,14 +38,14 @@ describe('ConnectionWindowService', () => {
     it('saving an existing config should correctly update its password', () => {
       const { service, localStorageService } = setup();
       localStorageService.getItem.and.returnValue(JSON.stringify(currentConfig));
-      const newPassword = 'shin123';
+      const newPassword = 'mangos';
 
       service.saveNewConfig({
         host: '127.0.0.1',
         port: 3306,
-        user: 'root',
+        user: 'mangos',
         password: newPassword,
-        database: 'acore_world',
+        database: 'mangos_world',
       });
 
       const expectedNewConfig = [{ ...currentConfig[0] }, { ...currentConfig[1] }];
@@ -69,13 +68,13 @@ describe('ConnectionWindowService', () => {
     it('saving a new config should correctly work', () => {
       const { service, localStorageService } = setup();
       localStorageService.getItem.and.returnValue(JSON.stringify(currentConfig));
-      const newPassword = 'shin123';
+      const newPassword = 'mangos';
       const newConfig = {
-        host: '192.168.1.100',
+        host: '127.0.0.1',
         port: 3306,
-        user: 'root',
+        user: 'mangos',
         password: newPassword,
-        database: 'acore_world',
+        database: 'mangos_world',
       };
 
       service.saveNewConfig(newConfig);

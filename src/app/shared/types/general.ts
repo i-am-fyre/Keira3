@@ -27,14 +27,9 @@ export interface MaxRow extends TableRow {
 }
 
 export interface VersionRow extends TableRow {
-  core_version: string;
-  core_revision: string;
-  db_version: string;
-  cache_id: number;
-}
-
-export interface VersionDbRow extends TableRow {
-  [key: string]: number;
+  version: string;
+  structure: string;
+  content: string;
 }
 
 export interface Flag {

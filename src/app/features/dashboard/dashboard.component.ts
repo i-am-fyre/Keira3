@@ -14,7 +14,7 @@ import { MysqlService } from '@keira-shared/services/mysql.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent extends SubscriptionHandler implements OnInit {
-  coreVersions: VersionRow;
+  databaseVersions: VersionRow;
   dbWorldVersion: string;
   error = false;
   public readonly KEIRA_VERSION = packageInfo.version;
@@ -43,9 +43,9 @@ export class DashboardComponent extends SubscriptionHandler implements OnInit {
       this.queryService.query<VersionRow>(query).subscribe(
         (data) => {
           if (data && data.length > 0) {
-            this.coreVersions = data[0];
+            this.databaseVersions = data[0];
 
-            // if (!this.coreVersions.db_version.startsWith('ACDB') || !this.coreVersions.core_version.startsWith('AzerothCore')) {
+            // if (!this.databaseVersions.db_version.startsWith('ACDB') || !this.databaseVersions.core_version.startsWith('AzerothCore')) {
             //   this.error = true;
             // }
           } else {

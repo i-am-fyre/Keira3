@@ -12,13 +12,13 @@ import { MysqlService } from '@keira-shared/services/mysql.service';
 
 class DashboardComponentPage extends PageObject<DashboardComponent> {
   get coreVersion() {
-    return this.query<HTMLTableCellElement>('#core-version');
+    return this.query<HTMLTableCellElement>('#database-version');
   }
   get coreStructure() {
-    return this.query<HTMLTableCellElement>('#core-structure');
+    return this.query<HTMLTableCellElement>('#database-structure');
   }
   get coreContent() {
-    return this.query<HTMLTableCellElement>('#core-content');
+    return this.query<HTMLTableCellElement>('#database-content');
   }
   get dbVersion() {
     return this.query<HTMLTableCellElement>('#db-version');

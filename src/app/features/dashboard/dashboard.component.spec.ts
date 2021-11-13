@@ -5,26 +5,23 @@ import { of, throwError } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
 import { MysqlQueryService } from '../../shared/services/mysql-query.service';
 import { MockedMysqlQueryService } from '@keira-testing/mocks';
-import { VersionRow } from '@keira-types/general';
+import { MCore, VersionRow } from '@keira-types/general';
 import { PageObject } from '@keira-testing/page-object';
 import { DashboardModule } from './dashboard.module';
 import { MysqlService } from '@keira-shared/services/mysql.service';
 
 class DashboardComponentPage extends PageObject<DashboardComponent> {
-  get coreVersion() {
+  get databaseCore() {
+    return this.query<HTMLTableCellElement>('#database-core');
+  }
+  get databaseVersion() {
     return this.query<HTMLTableCellElement>('#database-version');
   }
-  get coreStructure() {
+  get databaseStructure() {
     return this.query<HTMLTableCellElement>('#database-structure');
   }
-  get coreContent() {
+  get databaseContent() {
     return this.query<HTMLTableCellElement>('#database-content');
-  }
-  get dbVersion() {
-    return this.query<HTMLTableCellElement>('#db-version');
-  }
-  get dbWorldVersion() {
-    return this.query<HTMLTableCellElement>('#db-world-version');
   }
   get dbWarning() {
     return this.query<HTMLDivElement>('#database-warning', false);
@@ -36,11 +33,14 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
   let page: DashboardComponentPage;
 
+  const versionCore: MCore = {
+    core: 'MaNGOS x',
+  };
+
   const versionRow: VersionRow = {
-    core_version: '21',
-    core_structure: '1',
-    core_content: '1',
-    cache_id: 3,
+    database_version: '0',
+    database_structure: '0',
+    database_content: '0',
   };
 
   beforeEach(
@@ -65,9 +65,9 @@ describe('DashboardComponent', () => {
   it('should correctly display the versions', () => {
     fixture.detectChanges();
 
-    expect(page.coreVersion.innerHTML).toContain(versionRow.version);
-    expect(page.coreStructure.innerHTML).toContain(versionRow.structure);
-    expect(page.coreContent.innerHTML).toContain(versionRow.content);
+    expect(page.databaseVersion.innerHTML).toContain(versionRow.database_version);
+    expect(page.databaseStructure.innerHTML).toContain(versionRow.database_structure);
+    expect(page.databaseContent.innerHTML).toContain(versionRow.database_content);
     expect(page.dbWarning).toBe(null);
     expect(component.error).toBe(false);
   });
@@ -98,11 +98,9 @@ describe('DashboardComponent', () => {
 
   it('should correctly give error if the query returns an error', () => {
     const wrongVersionRow: VersionRow = {
-      core_version: '21',
-      core_structure: '1',
-      core_content: '1',
-      db_version: 'n/a',
-      cache_id: 3,
+      database_version: 'version error',
+      database_structure: 'structure error',
+      database_content: 'content error',
     };
     when(MockedMysqlQueryService.query(anyString())).thenReturn(of([wrongVersionRow]));
 

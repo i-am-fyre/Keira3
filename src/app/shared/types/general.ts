@@ -26,10 +26,14 @@ export interface MaxRow extends TableRow {
   max: number;
 }
 
+export interface MCore extends TableRow {
+  core: string;
+}
+
 export interface VersionRow extends TableRow {
-  version: string;
-  structure: string;
-  content: string;
+  database_version: string;
+  database_structure: string;
+  database_content: string;
 }
 
 export interface Flag {

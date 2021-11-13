@@ -1,9 +1,11 @@
 <div class="wrapper img-{{ RANDOM_IMAGE }}">
-  <div class="content">
+  <div class="header">
     <div class="title">
-      <span class="lead font-weight-bold">Keira {{ KEIRA_VERSION }}</span>
+      <span class="lead font-weight-bold">Keira3 for MaNGOS</span>
     </div>
+  </div>
 
+  <div class="content">
     <div class="form-wrapper" *ngIf="form">
       <form [formGroup]="form">
         <div class="form-group">
@@ -79,12 +81,14 @@
         <keira-query-error [error]="error"></keira-query-error>
       </div>
     </div>
+  </div>
 
+  <div class="footer">
     <div class="end-text">
       <!-- We have worked hard to create Keira3 for free, please do not remove the credits -->
-      Created by <a href="https://github.com/FrancescoBorzi" target="_blank">Shin</a> && <a href="https://github.com/Helias" target="_blank">Helias</a>
-
-      Ported and updated by the <a href="https://github.com/Mangos" target="_blank">MaNGOS team</a> for MaNGOS-based cores.
+      <p>Created by <a href="https://github.com/FrancescoBorzi" target="_blank">Shin</a> & <a href="https://github.com/Helias" target="_blank">Helias</a>
+        <br>
+        Ported and updated by the <a href="https://github.com/Mangos" target="_blank">MaNGOS team</a> for MaNGOS-based cores.</p>
     </div>
   </div>
 </div>

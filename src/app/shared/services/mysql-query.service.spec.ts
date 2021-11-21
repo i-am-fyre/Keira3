@@ -906,7 +906,7 @@ describe('MysqlQueryService', () => {
         name: 'getGameObjectNameByGuid',
         query: `SELECT name AS v FROM gameobject_template AS gt INNER JOIN gameobject AS g ON gt.entry = g.id WHERE g.guid = ${guid}`,
       },
-      { name: 'getQuestTitleById', query: `SELECT LogTitle AS v FROM quest_template WHERE ID = ${id}` },
+      { name: 'getQuestTitleById', query: `SELECT Title AS v FROM quest_template WHERE entry = ${id}` },
       { name: 'getItemNameById', query: `SELECT name AS v FROM item_template WHERE entry = ${id}` },
       { name: 'getPrevQuestById', query: `SELECT PrevQuestID AS v FROM quest_template_addon WHERE id = ${id}` },
       { name: 'getItemByStartQuest', query: `SELECT entry AS v FROM item_template WHERE startquest = ${id}` },
@@ -946,14 +946,14 @@ describe('MysqlQueryService', () => {
     it('getQuestTitleByCriteria (case 1)', () => {
       expect(service.getQuestTitleByCriteria(null, 2, 3, 4, 5)).toEqual(resultToPromise);
       expect(service.queryValueToPromise).toHaveBeenCalledWith(
-        'SELECT `LogTitle` AS "v" FROM `quest_template` WHERE (RequiredNpcOrGo2 = 2) AND (RequiredNpcOrGo3 = 3) AND (RequiredNpcOrGo4 = 4) AND (RequiredSpellCast1 = 5)',
+        'SELECT `Title` AS "v" FROM `quest_template` WHERE (ReqCreatureOrGOId2 = 2) AND (ReqCreatureOrGOId3 = 3) AND (ReqCreatureOrGOId4 = 4) AND (RequiredSpellCast1 = 5)',
       );
     });
 
     it('getQuestTitleByCriteria (case 2)', () => {
       expect(service.getQuestTitleByCriteria(1, null, null, null)).toEqual(resultToPromise);
       expect(service.queryValueToPromise).toHaveBeenCalledWith(
-        'SELECT `LogTitle` AS "v" FROM `quest_template` WHERE (RequiredNpcOrGo1 = 1)',
+        'SELECT `Title` AS "v" FROM `quest_template` WHERE (ReqCreatureOrGOId1 = 1)',
       );
     });
 

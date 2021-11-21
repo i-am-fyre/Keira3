@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HandlerService } from '@keira-abstract/service/handlers/handler.service';
-import { QUEST_TEMPLATE_TABLE, QuestTemplate } from '@keira-types/quest-template.type';
+import { QUEST_TEMPLATE_TABLE, QuestTemplate0 } from '@keira-types/quest-template.type';
 import { QUEST_TEMPLATE_ADDON_TABLE } from '@keira-types/quest-template-addon.type';
 import { QUEST_OFFER_REWARD_TABLE } from '@keira-types/quest-offer-reward.type';
 import { QUEST_REQUEST_ITEMS_TABLE } from '@keira-types/quest-request-items.type';
@@ -12,7 +12,7 @@ import { GAMEOBJECT_QUESTSTARTER_TABLE } from '@keira-types/gameobject-queststar
 import { GAMEOBJECT_QUESTENDER_TABLE } from '@keira-types/gameobject-questender.type';
 
 @Injectable()
-export class QuestHandlerService extends HandlerService<QuestTemplate> {
+export class QuestHandlerService extends HandlerService<QuestTemplate0> {
   get isQuestTemplateUnsaved(): boolean {
     return this.statusMap[QUEST_TEMPLATE_TABLE];
   }

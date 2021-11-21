@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { SingleRowEditorComponent } from '@keira-abstract/components/editors/single-row-editor.component';
-import { QuestTemplate } from '@keira-types/quest-template.type';
+import { QuestTemplate0 } from '@keira-types/quest-template.type';
 import { QuestTemplateService } from './quest-template.service';
 import { QuestHandlerService } from '../quest-handler.service';
 import { ALLOWABLE_RACES } from '@keira-constants/flags/allowable-races';
@@ -15,7 +15,7 @@ import { QUEST_INFO } from '@keira-shared/constants/options/quest-info';
   templateUrl: './quest-template.component.html',
   styleUrls: ['./quest-template.component.scss'],
 })
-export class QuestTemplateComponent extends SingleRowEditorComponent<QuestTemplate> {
+export class QuestTemplateComponent extends SingleRowEditorComponent<QuestTemplate0> {
   public readonly QUEST_FLAGS = QUEST_FLAGS;
   public readonly QUEST_TYPE = QUEST_TYPE;
   public readonly ALLOWABLE_RACES = ALLOWABLE_RACES;

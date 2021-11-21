@@ -121,14 +121,6 @@ export class SqliteQueryService extends QueryService {
     return this.queryToPromiseCached<Lock>('getLockById', String(id), `SELECT * FROM lock WHERE id = ${id}`);
   }
 
-  getRewardXP(RewardXPDifficulty: string | number, QuestLevel: string | number): Promise<string> {
-    return this.queryValueToPromiseCached<string>(
-      'getRewardXP',
-      String(RewardXPDifficulty) + '_' + String(QuestLevel),
-      `SELECT field${Number(RewardXPDifficulty) + 1} AS v FROM questxp WHERE id = ${QuestLevel}`,
-    );
-  }
-
   getItemExtendedCost(IDs: number[]): Promise<ItemExtendedCost[]> {
     return this.queryToPromiseCached<ItemExtendedCost>(
       'getItemExtendedCost',

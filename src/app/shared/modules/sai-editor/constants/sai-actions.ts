@@ -379,7 +379,7 @@ SAI_ACTION_TOOLTIPS[SAI_ACTIONS.RESET_GOBJECT] =
 
 // SMART_ACTION_CALL_KILLEDMONSTER
 SAI_ACTION_TOOLTIPS[SAI_ACTIONS.CALL_KILLEDMONSTER] =
-  'Gives a kill credit to our (player) target. The entry is the same entry as quest_template.RequiredNpcOrGo(1/2/3/4).';
+  'Gives a kill credit to our (player) target. The entry is the same entry as quest_template.ReqCreatureOrGOId(1/2/3/4).';
 SAI_ACTION_PARAM1_NAMES[SAI_ACTIONS.CALL_KILLEDMONSTER] = 'CreatureId';
 
 // SMART_ACTION_SET_INST_DATA

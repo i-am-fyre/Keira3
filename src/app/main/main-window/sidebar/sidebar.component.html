@@ -47,7 +47,7 @@
             <a id="collapse-all" (click)="collapseAll()"> <i class="fas fa-angle-double-up"></i> Collapse All </a>
           </li>
 
-          <li class="sidebar-dropdown" [ngClass]="{ active: menuStates.creature === 'down' }">
+          <!-- <li class="sidebar-dropdown" [ngClass]="{ active: menuStates.creature === 'down' }">
             <a id="creature-editor-toggle" (click)="toggleState('creature')">
               <i class="fa fa-dragon"></i>
               <span>Creature</span>
@@ -145,7 +145,7 @@
                 </ng-container>
               </ul>
             </div>
-          </li>
+          </li> -->
 
           <li class="sidebar-dropdown" [ngClass]="{ active: menuStates.quest === 'down' }">
             <a (click)="toggleState('quest')">
@@ -161,57 +161,15 @@
                 <ng-container *ngIf="questHandlerService.selected">
                   <li>
                     <a href="#" routerLinkActive="active" [routerLink]="'quest/quest-template'">
-                      Quest Template <keira-unsaved-icon *ngIf="questHandlerService.isQuestTemplateUnsaved"></keira-unsaved-icon>
+                      Quest Editor <keira-unsaved-icon *ngIf="questHandlerService.isQuestTemplateUnsaved"></keira-unsaved-icon>
                     </a>
                   </li>
-                  <ng-container *ngIf="!questHandlerService.isNew">
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/quest-template-addon'">
-                        Quest Template Addon
-                        <keira-unsaved-icon *ngIf="questHandlerService.isQuestTemplateAddonUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/quest-offer-reward'">
-                        Quest Offer Reward <keira-unsaved-icon *ngIf="questHandlerService.isQuestOfferRewardUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/quest-request-items'">
-                        Quest Request Items <keira-unsaved-icon *ngIf="questHandlerService.isQuestRequestItemsUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/creature-queststarter'">
-                        Creature Queststarter
-                        <keira-unsaved-icon *ngIf="questHandlerService.isCreatureQueststarterUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/creature-questender'">
-                        Creature Questender
-                        <keira-unsaved-icon *ngIf="questHandlerService.isCreatureQuestenderUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/gameobject-queststarter'">
-                        Gameobject Queststarter
-                        <keira-unsaved-icon *ngIf="questHandlerService.isGameobjectQueststarterUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" routerLinkActive="active" [routerLink]="'quest/gameobject-questender'">
-                        Gameobject Questender
-                        <keira-unsaved-icon *ngIf="questHandlerService.isGameobjectQuestenderUnsaved"></keira-unsaved-icon>
-                      </a>
-                    </li>
-                  </ng-container>
                 </ng-container>
               </ul>
             </div>
           </li>
 
-          <li class="sidebar-dropdown" [ngClass]="{ active: menuStates.gameobject === 'down' }">
+          <!-- <li class="sidebar-dropdown" [ngClass]="{ active: menuStates.gameobject === 'down' }">
             <a (click)="toggleState('gameobject')">
               <i class="fa fa-dungeon"></i>
               <span>GameObject</span>
@@ -459,7 +417,7 @@
                 </ng-container>
               </ul>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </perfect-scrollbar>

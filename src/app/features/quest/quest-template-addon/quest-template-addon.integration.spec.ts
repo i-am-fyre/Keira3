@@ -270,7 +270,7 @@ describe('QuestTemplateAddon integration tests', () => {
         const { page, fixture } = setup(false);
         const field = 'NextQuestID';
         const mysqlQueryService = TestBed.inject(MysqlQueryService);
-        (mysqlQueryService.query as Spy).and.returnValue(of([{ ID: 123, LogTitle: 'Mock Quest' }]));
+        (mysqlQueryService.query as Spy).and.returnValue(of([{ ID: 123, Title: 'Mock Quest' }]));
 
         page.clickElement(page.getSelectorBtn(field));
         await page.whenReady();

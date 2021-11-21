@@ -87,7 +87,7 @@ describe('QuestPreviewService', () => {
     expect(service.gameobjectQuestenderList).toEqual(gameobjectQuestenderService.newRows);
   });
 
-  it('handle questTemplate values', () => {
+  it('handle QuestTemplate0 values', () => {
     const { service, questTemplateService } = setup();
 
     const mockTitle = 'Test';
@@ -95,10 +95,10 @@ describe('QuestPreviewService', () => {
     const minLevel = 10;
     const mockRaces = 123;
 
-    questTemplateService.form.controls.LogTitle.setValue(mockTitle);
+    questTemplateService.form.controls.Title.setValue(mockTitle);
     questTemplateService.form.controls.QuestLevel.setValue(questLevel);
     questTemplateService.form.controls.MinLevel.setValue(minLevel);
-    questTemplateService.form.controls.AllowableRaces.setValue(mockRaces);
+    questTemplateService.form.controls.RequiredRaces.setValue(mockRaces);
 
     expect(service.title).toBe(mockTitle);
     expect(service.level).toBe(String(questLevel));
@@ -106,7 +106,7 @@ describe('QuestPreviewService', () => {
     expect(service.side).toBeNull();
     expect(service.races).toEqual([1, 2, 4, 5, 6, 7]);
 
-    questTemplateService.form.controls.AllowableRaces.setValue(null);
+    questTemplateService.form.controls.RequiredRaces.setValue(null);
     expect(service.races).toBeNull();
 
     // check if quest is sharable
@@ -121,15 +121,15 @@ describe('QuestPreviewService', () => {
     'start item',
     waitForAsync(async () => {
       const { service, questTemplateService, mysqlQueryService } = setup();
-      const mockStartItem = 123456;
-      const mockStartItemName = 'Sword of AzerothCore';
-      spyOn(mysqlQueryService, 'getItemNameById').and.callFake(() => Promise.resolve(mockStartItemName));
+      const mockSrcItemId = 123456;
+      const mockSrcItemIdName = 'Sword of AzerothCore';
+      spyOn(mysqlQueryService, 'getItemNameById').and.callFake(() => Promise.resolve(mockSrcItemIdName));
 
-      questTemplateService.form.controls.StartItem.setValue(mockStartItem);
+      questTemplateService.form.controls.SrcItemId.setValue(mockSrcItemId);
 
-      expect(service.startItem).toEqual(mockStartItem);
-      expect(await service.startItemName$).toEqual(mockStartItemName);
-      expect(mysqlQueryService.getItemNameById).toHaveBeenCalledWith(mockStartItem);
+      expect(service.SrcItemId).toEqual(mockSrcItemId);
+      expect(await service.SrcItemIdName$).toEqual(mockSrcItemIdName);
+      expect(mysqlQueryService.getItemNameById).toHaveBeenCalledWith(mockSrcItemId);
     }),
   );
 
@@ -182,22 +182,18 @@ describe('QuestPreviewService', () => {
     const mockSkillName = 'Mock Skill';
     const mockSkill = 755;
     const mockRewardXP = '450';
-    const mockDifficulty = 1;
     const mockQuestLevel = 2;
     questTemplateAddonService.form.controls.RequiredSkillID.setValue(mockSkill);
-    questTemplateService.form.controls.RewardXPDifficulty.setValue(mockDifficulty);
     questTemplateService.form.controls.QuestLevel.setValue(mockQuestLevel);
 
     spyOn(sqliteQueryService, 'getSkillNameById').and.callFake(() => Promise.resolve(mockSkillName));
     spyOn(sqliteQueryService, 'getRewardXP').and.callFake(() => Promise.resolve(mockRewardXP));
 
     expect(await service.requiredSkill$).toBe(mockSkillName);
-    expect(await service.rewardXP$).toBe(mockRewardXP);
 
     expect(sqliteQueryService.getSkillNameById).toHaveBeenCalledTimes(1);
     expect(sqliteQueryService.getSkillNameById).toHaveBeenCalledWith(mockSkill);
     expect(sqliteQueryService.getRewardXP).toHaveBeenCalledTimes(1);
-    expect(sqliteQueryService.getRewardXP).toHaveBeenCalledWith(mockDifficulty, mockQuestLevel);
   });
 
   it('difficultyLevels', () => {
@@ -482,8 +478,8 @@ describe('QuestPreviewService', () => {
 
     it('QuestReputation values 1', () => {
       const { service, questTemplateService } = setup();
-      questTemplateService.form.controls.RewardFactionID1.setValue(mockRepFaction);
-      questTemplateService.form.controls.RewardFactionValue1.setValue(mockRepValue);
+      questTemplateService.form.controls.RewRepFaction1.setValue(mockRepFaction);
+      questTemplateService.form.controls.RewRepValue1.setValue(mockRepValue);
 
       expect(service.getRewardReputation(1, [])).toBe(mockRepValue);
       expect(service.getRewardReputation(1, [mockQuestReputationReward1])).toBe(mockRepValue);
@@ -492,8 +488,8 @@ describe('QuestPreviewService', () => {
     it('all dailyType and normal quest_rate', () => {
       const { service, questTemplateService } = setup();
       const getPeriodicQuestSpy: Spy = spyOn<any>(service, 'getPeriodicQuest');
-      questTemplateService.form.controls.RewardFactionID1.setValue(mockRepFaction);
-      questTemplateService.form.controls.RewardFactionValue1.setValue(mockRepValue);
+      questTemplateService.form.controls.RewRepFaction1.setValue(mockRepFaction);
+      questTemplateService.form.controls.RewRepValue1.setValue(mockRepValue);
 
       getPeriodicQuestSpy.and.returnValue(QUEST_PERIOD.DAILY);
       expect(service.getRewardReputation(1, [mockQuestReputationReward2])).toBe(mockRepValue * (dailyRate - 1));
@@ -511,8 +507,8 @@ describe('QuestPreviewService', () => {
     it('in case of repeatable quest', () => {
       const { service, questTemplateService } = setup();
       spyOn(service, 'isRepeatable').and.returnValue(true);
-      questTemplateService.form.controls.RewardFactionID1.setValue(mockRepFaction);
-      questTemplateService.form.controls.RewardFactionValue1.setValue(mockRepValue);
+      questTemplateService.form.controls.RewRepFaction1.setValue(mockRepFaction);
+      questTemplateService.form.controls.RewRepValue1.setValue(mockRepValue);
 
       expect(service.getRewardReputation(1, [mockQuestReputationReward2])).toBe(mockRepValue * (repeatableRate - 1));
     });
@@ -520,15 +516,15 @@ describe('QuestPreviewService', () => {
     it('getObjective$', async () => {
       const { service, questTemplateService, mysqlQueryService } = setup();
 
-      questTemplateService.form.controls.RequiredNpcOrGo1.setValue(0);
+      questTemplateService.form.controls.ReqCreatureOrGOId1.setValue(0);
       expect(await service.getObjective$(1)).toBeUndefined();
 
-      questTemplateService.form.controls.RequiredNpcOrGo1.setValue(-1);
+      questTemplateService.form.controls.ReqCreatureOrGOId1.setValue(-1);
       expect(await service.getObjective$(1)).toBe('Helias Gameobject');
       expect(mysqlQueryService.getGameObjectNameById).toHaveBeenCalledTimes(1);
       expect(mysqlQueryService.getGameObjectNameById).toHaveBeenCalledWith(1);
 
-      questTemplateService.form.controls.RequiredNpcOrGo1.setValue(1);
+      questTemplateService.form.controls.ReqCreatureOrGOId1.setValue(1);
       expect(await service.getObjective$(1)).toBe('Helias Creature');
       expect(mysqlQueryService.getCreatureNameById).toHaveBeenCalledTimes(1);
       expect(mysqlQueryService.getCreatureNameById).toHaveBeenCalledWith(1);
@@ -537,55 +533,55 @@ describe('QuestPreviewService', () => {
     it('getObjectiveCount', () => {
       const { service, questTemplateService } = setup();
 
-      questTemplateService.form.controls.RequiredNpcOrGoCount1.setValue(0);
+      questTemplateService.form.controls.ReqCreatureOrGOCount1.setValue(0);
       expect(service.getObjectiveCount(1)).toBe('');
 
-      questTemplateService.form.controls.RequiredNpcOrGoCount1.setValue(2);
+      questTemplateService.form.controls.ReqCreatureOrGOCount1.setValue(2);
       expect(service.getObjectiveCount(1)).toBe('(2)');
     });
 
     it('isNpcOrGo', () => {
       const { service, questTemplateService } = setup();
 
-      questTemplateService.form.controls.RequiredNpcOrGoCount1.setValue(0);
+      questTemplateService.form.controls.ReqCreatureOrGOCount1.setValue(0);
       expect(service.isNpcOrGoObj(1)).toBeFalse();
 
-      questTemplateService.form.controls.RequiredNpcOrGoCount1.setValue(1);
+      questTemplateService.form.controls.ReqCreatureOrGOCount1.setValue(1);
       expect(service.isNpcOrGoObj(1)).toBeTrue();
     });
 
     it('getObjItemCount', () => {
       const { service, questTemplateService } = setup();
 
-      questTemplateService.form.controls.RequiredItemCount1.setValue(0);
+      questTemplateService.form.controls.ReqItemCount1.setValue(0);
       expect(service.getObjItemCount(1)).toBe('');
 
-      questTemplateService.form.controls.RequiredItemCount1.setValue(2);
+      questTemplateService.form.controls.ReqItemCount1.setValue(2);
       expect(service.getObjItemCount(1)).toBe('(2)');
     });
 
     it('getFactionByValue', () => {
       const { service, questTemplateService } = setup();
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(0);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(0);
       expect(service.getFactionByValue(1)).toBe('');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(900);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(900);
       expect(service.getFactionByValue(1)).toBe('(Neutral)');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(2100);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(2100);
       expect(service.getFactionByValue(1)).toBe('(Neutral)');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(3000);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(3000);
       expect(service.getFactionByValue(1)).toBe('(Friendly)');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(9000);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(9000);
       expect(service.getFactionByValue(1)).toBe('(Honored)');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(21000);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(21000);
       expect(service.getFactionByValue(1)).toBe('(Revered)');
 
-      questTemplateService.form.controls.RequiredFactionValue1.setValue(42000);
+      questTemplateService.form.controls.RepObjectiveValue.setValue(42000);
       expect(service.getFactionByValue(1)).toBe('(Exalted)');
     });
 
@@ -599,19 +595,19 @@ describe('QuestPreviewService', () => {
     it('get objectiveText', () => {
       const { service, questTemplateService } = setup();
 
-      questTemplateService.form.controls.LogDescription.setValue('mock objective text');
+      questTemplateService.form.controls.Details.setValue('mock objective text');
       expect(service.objectiveText).toBe('mock objective text');
     });
 
     it('isFieldAvailable', () => {
       const { service, questTemplateService } = setup();
 
-      expect(service.isFieldAvailable('RewardFactionID', 'RewardFactionValue', 1)).toBeFalse();
+      expect(service.isFieldAvailable('RewRepFaction', 'RewRepValue', 1)).toBeFalse();
 
-      questTemplateService.form.controls.RewardFactionID1.setValue(123);
-      questTemplateService.form.controls.RewardFactionValue1.setValue(10);
+      questTemplateService.form.controls.RewRepFaction1.setValue(123);
+      questTemplateService.form.controls.RewRepValue1.setValue(10);
 
-      expect(service.isFieldAvailable('RewardFactionID', 'RewardFactionValue', 1)).toBeTrue();
+      expect(service.isFieldAvailable('RewRepFaction', 'RewRepValue', 1)).toBeTrue();
     });
 
     it('isRewardReputation', () => {
@@ -626,14 +622,14 @@ describe('QuestPreviewService', () => {
       expect(isFieldAvailableSpy).toHaveBeenCalledTimes(10);
     });
 
-    it('isRewardItems', () => {
+    it('isRewItemIds', () => {
       const { service } = setup();
       const isFieldAvailableSpy = spyOn(service, 'isFieldAvailable').and.returnValue(false);
 
-      expect(service.isRewardItems()).toBeFalse();
+      expect(service.isRewItemIds()).toBeFalse();
 
       isFieldAvailableSpy.and.callFake((f1, f2, idx) => idx === 4); // return true in the last condition
-      expect(service.isRewardItems()).toBeTrue();
+      expect(service.isRewItemIds()).toBeTrue();
 
       expect(isFieldAvailableSpy).toHaveBeenCalledTimes(8);
     });
@@ -655,10 +651,6 @@ describe('QuestPreviewService', () => {
 
       expect(service.isGains()).toBeFalse();
 
-      questTemplateService.form.controls.RewardXPDifficulty.setValue(1);
-      expect(service.isGains()).toBeTrue();
-
-      questTemplateService.form.controls.RewardXPDifficulty.setValue(0);
       questTemplateService.form.controls.RewardTalents.setValue(1);
       expect(service.isGains()).toBeTrue();
 
@@ -669,30 +661,30 @@ describe('QuestPreviewService', () => {
 
     it('isReward', () => {
       const { service } = setup();
-      spyOn(service, 'isRewardItems').and.returnValue(false);
+      spyOn(service, 'isRewItemIds').and.returnValue(false);
       spyOn(service, 'isRewardChoiceItems').and.returnValue(false);
-      const rewardSpellSpy = spyOn(service, 'rewardSpell').and.returnValue(0);
+      const RewSpellSpy = spyOn(service, 'RewSpell').and.returnValue(0);
 
       expect(service.isReward()).toBeFalse();
 
-      rewardSpellSpy.and.returnValue(1);
+      RewSpellSpy.and.returnValue(1);
       expect(service.isReward()).toBeTrue();
 
-      expect(service.isRewardItems).toHaveBeenCalledTimes(2);
+      expect(service.isRewItemIds).toHaveBeenCalledTimes(2);
       expect(service.isRewardChoiceItems).toHaveBeenCalledTimes(2);
-      expect(rewardSpellSpy).toHaveBeenCalledTimes(2);
+      expect(RewSpellSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('rewardSpell', () => {
+    it('RewSpell', () => {
       const { service, questTemplateService } = setup();
 
-      expect(service.rewardSpell()).toBeNull();
+      expect(service.RewSpell()).toBeNull();
 
-      questTemplateService.form.controls.RewardSpell.setValue(124);
-      expect(service.rewardSpell()).toBe(124);
+      questTemplateService.form.controls.RewSpell.setValue(124);
+      expect(service.RewSpell()).toBe(124);
 
-      questTemplateService.form.controls.RewardDisplaySpell.setValue(123);
-      expect(service.rewardSpell()).toBe(123);
+      questTemplateService.form.controls.RewSpellCast.setValue(123);
+      expect(service.RewSpell()).toBe(123);
     });
 
     it('isUnavailable() should correctly work', () => {

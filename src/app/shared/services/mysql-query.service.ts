@@ -8,7 +8,6 @@ import { MaxRow, TableRow } from '../types/general';
 import { squelConfig } from '../../config/squel.config';
 import { ConfigService } from './config.service';
 import { QueryService } from '@keira-shared/services/query.service';
-import { SmartScripts } from '@keira-types/smart-scripts.type';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { QuestReputationReward } from 'app/features/quest/quest-preview/quest-preview.model';
 
@@ -327,12 +326,12 @@ export class MysqlQueryService extends QueryService {
     return this.formatQuery(query);
   }
 
-  getTimedActionlists(creatureId: string | number): Observable<SmartScripts[]> {
-    const startId = +creatureId * 100;
-    return this.query<SmartScripts>(
-      `SELECT * FROM smart_scripts WHERE source_type = 9 AND entryorguid >= ${startId} AND entryorguid < ${startId + 100}`,
-    );
-  }
+  // getTimedActionlists(creatureId: string | number): Observable<SmartScripts[]> {
+  //   const startId = +creatureId * 100;
+  //   return this.query<SmartScripts>(
+  //     `SELECT * FROM smart_scripts WHERE source_type = 9 AND entryorguid >= ${startId} AND entryorguid < ${startId + 100}`,
+  //   );
+  // }
 
   getCreatureNameById(id: string | number): Promise<string> {
     return this.queryValueToPromiseCached('getCreatureNameById', String(id), `SELECT name AS v FROM creature_template WHERE entry = ${id}`);
@@ -366,19 +365,19 @@ export class MysqlQueryService extends QueryService {
     return this.queryValueToPromiseCached('getQuestTitleById', String(id), `SELECT Title AS v FROM quest_template WHERE entry = ${id}`);
   }
 
-  getPrevQuestById(id: string | number): Promise<string> {
-    return this.queryValueToPromiseCached(
-      'getPrevQuestById',
-      String(id),
-      `SELECT PrevQuestID AS v FROM quest_template_addon WHERE id = ${id}`,
-    );
-  }
+  // getPrevQuestById(id: string | number): Promise<string> {
+  //   return this.queryValueToPromiseCached(
+  //     'getPrevQuestById',
+  //     String(id),
+  //     `SELECT PrevQuestID AS v FROM quest_template_addon WHERE id = ${id}`,
+  //   );
+  // }
 
-  getNextQuestById(id: string | number, usingPrev = false): Promise<string> {
-    return usingPrev
-      ? this.queryValueToPromiseCached('getNextQuest1', String(id), `SELECT id AS v FROM quest_template_addon WHERE PrevQuestID = ${id}`)
-      : this.queryValueToPromiseCached('getNextQuest2', String(id), `SELECT NextQuestID AS v FROM quest_template_addon WHERE id = ${id}`);
-  }
+  // getNextQuestById(id: string | number, usingPrev = false): Promise<string> {
+  //   return usingPrev
+  //     ? this.queryValueToPromiseCached('getNextQuest1', String(id), `SELECT id AS v FROM quest_template_addon WHERE PrevQuestID = ${id}`)
+  //     : this.queryValueToPromiseCached('getNextQuest2', String(id), `SELECT NextQuestID AS v FROM quest_template_addon WHERE id = ${id}`);
+  // }
 
   getItemByStartQuest(id: string | number): Promise<string> {
     return this.queryValueToPromiseCached(

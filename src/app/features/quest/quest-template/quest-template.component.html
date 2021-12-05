@@ -28,7 +28,7 @@
             <input [formControlName]="'Title'" id="Title" class="form-control form-control-sm" />
           </div>
 
-          <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
+          <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="Type">Type</label>
             <keira-single-value-selector-btn
               [control]="editorService.form.controls.Type"
@@ -36,7 +36,7 @@
               [modalClass]="'modal-md'"
             ></keira-single-value-selector-btn>
             <input [formControlName]="'Type'" id="Type" type="number" class="form-control form-control-sm" />
-          </div>
+          </div> -->
 
           <div class="form-group col-12 col-sm-6 col-md-6 col-lg-4 col-xl-2">
             <label class="control-label" for="QuestLevel">QuestLevel</label>
@@ -89,7 +89,7 @@
             <input [formControlName]="'SuggestedPlayers'" id="SuggestedPlayers" type="number" class="form-control form-control-sm" />
           </div>
 
-          <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
+          <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="SrcItemId">
               <keira-icon [itemId]="editorService.form.controls.SrcItemId.value"></keira-icon>
               SrcItemId
@@ -104,16 +104,16 @@
               [tooltip]="'Items given by the quest giver at beginning of the quest. They will be deleted when quest is abandoned.'"
             ></i>
             <input [formControlName]="'SrcItemId'" id="SrcItemId" type="number" class="form-control form-control-sm" />
-          </div>
+          </div> -->
 
-          <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
+          <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="Flags">Flags</label>
             <keira-flags-selector-btn
               [control]="editorService.form.controls.Flags"
               [config]="{ flags: QUEST_FLAGS, name: 'Flags' }"
             ></keira-flags-selector-btn>
             <input [formControlName]="'Flags'" id="Flags" type="number" class="form-control form-control-sm" />
-          </div>
+          </div> -->
 
           <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="LimitTime">LimitTime</label>
@@ -125,14 +125,14 @@
             <input [formControlName]="'LimitTime'" id="LimitTime" type="number" class="form-control form-control-sm" />
           </div>
 
-          <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
+          <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="RequiredRaces">RequiredRaces</label>
             <keira-flags-selector-btn
               [control]="editorService.form.controls.RequiredRaces"
               [config]="{ flags: ALLOWABLE_RACES, name: 'RequiredRaces' }"
             ></keira-flags-selector-btn>
             <input [formControlName]="'RequiredRaces'" id="RequiredRaces" type="number" class="form-control form-control-sm" />
-          </div>
+          </div> -->
 
           <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="Unknown0">Unknown0</label>
@@ -221,12 +221,11 @@
           </div>
         </div>
       </div>
-      <div class="content-block">
+      <!-- <div class="content-block">
         <span class="category-title">
           RequiredItems <i class="fas fa-info-circle ms-1" [placement]="'auto'" [tooltip]="'Items required to complete the quest'"></i>
         </span>
         <div class="row">
-          <!-- For M0, M1  only need 4 not 6. -->
           <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <div class="row">
               <div class="col-12">
@@ -247,8 +246,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="content-block">
+      </div> -->
+      <!-- <div class="content-block">
         <span class="category-title">
           Required Factions, NpcOrGo
           <i class="fas fa-info-circle ms-1" [placement]="'auto'" [tooltip]="'If > 0: creature; if < 0: gameobject'"></i>
@@ -318,8 +317,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="content-block">
+      </div> -->
+      <!-- <div class="content-block">
         <span class="category-title">Rewards</span>
         <div class="row">
           <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
@@ -379,8 +378,8 @@
             <input [formControlName]="'RewSpell'" id="RewSpell" type="number" class="form-control form-control-sm" />
           </div>
         </div>
-      </div>
-      <div class="content-block">
+      </div> -->
+      <!-- <div class="content-block">
         <span class="category-title">RewItemIds</span>
         <div class="row">
           <div *ngFor="let i of [1, 2, 3, 4]" class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
@@ -403,8 +402,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="content-block">
+      </div> -->
+      <!-- <div class="content-block">
         <span class="category-title">RewChoiceItem</span>
         <div class="row">
           <div *ngFor="let i of [1, 2, 3, 4, 5, 6]" class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
@@ -437,8 +436,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="content-block">
+      </div> -->
+      <!-- <div class="content-block">
         <span class="category-title">
           RewardFactions
           <i
@@ -470,7 +469,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </form>
 
     <keira-quest-preview></keira-quest-preview>

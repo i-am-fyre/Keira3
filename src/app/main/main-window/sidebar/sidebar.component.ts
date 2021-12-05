@@ -3,19 +3,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SidebarService } from './sidebar.service';
 
 import { MysqlService } from '@keira-shared/services/mysql.service';
-import { CreatureHandlerService } from '../../../features/creature/creature-handler.service';
 import { QuestHandlerService } from '../../../features/quest/quest-handler.service';
-import { GameobjectHandlerService } from '../../../features/gameobject/gameobject-handler.service';
-import { ItemHandlerService } from '../../../features/item/item-handler.service';
-import { GossipHandlerService } from '../../../features/gossip/gossip-handler.service';
-import { ConditionsHandlerService } from '../../../features/conditions/conditions-handler.service';
-import { SaiHandlerService } from '@keira-shared/modules/sai-editor/sai-handler.service';
 import { LocationService } from '@keira-shared/services/location.service';
-import { ReferenceLootHandlerService } from '../../../features/other-loots/reference-loot/reference-loot-handler.service';
-import { SpellLootHandlerService } from '../../../features/other-loots/spell-loot/spell-loot-handler.service';
-import { FishingLootHandlerService } from '../../../features/other-loots/fishing-loot/fishing-loot-handler.service';
-import { MailLootHandlerService } from '../../../features/other-loots/mail-loot/mail-loot-handler.service';
-import { SpellHandlerService } from '../../../features/spell/spell-handler.service';
 
 const animationTime = 200;
 
@@ -50,18 +39,7 @@ export class SidebarComponent {
   constructor(
     public sidebarService: SidebarService,
     public mysqlService: MysqlService,
-    public creatureHandlerService: CreatureHandlerService,
     public questHandlerService: QuestHandlerService,
-    public gameobjectHandlerService: GameobjectHandlerService,
-    public itemHandlerService: ItemHandlerService,
-    public gossipHandlerService: GossipHandlerService,
-    public conditionsHandlerService: ConditionsHandlerService,
-    public saiHandlerService: SaiHandlerService,
-    public referenceLootHandlerService: ReferenceLootHandlerService,
-    public spellLootHandlerService: SpellLootHandlerService,
-    public fishingLootHandlerService: FishingLootHandlerService,
-    public mailLootHandlerService: MailLootHandlerService,
-    public spellHandlerService: SpellHandlerService,
     private locationService: LocationService,
   ) {}
 

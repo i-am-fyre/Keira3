@@ -2,7 +2,7 @@ import { TableRow } from '@keira-shared/types/general';
 
 export interface Quest {
   entry: number;
-  title: string;
+  Title: string;
 }
 
 export interface DifficultyLevel {

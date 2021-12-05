@@ -19,16 +19,8 @@ import { AppComponent } from './main/app.component';
 import { ConnectionWindowModule } from './main/connection-window/connection-window.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { MainWindowModule } from './main/main-window/main-window.module';
-import { CreatureModule } from './features/creature/creature.module';
 import { QuestModule } from './features/quest/quest.module';
-import { GameobjectModule } from './features/gameobject/gameobject.module';
-import { ItemModule } from './features/item/item.module';
-import { GossipModule } from './features/gossip/gossip.module';
-import { ConditionsModule } from './features/conditions/conditions.module';
-import { SmartScriptsModule } from './features/smart-scripts/smart-scripts.module';
 import { SqlEditorModule } from './features/sql-editor/sql-editor.module';
-import { OtherLootsModule } from './features/other-loots/other-loots.module';
-import { SpellModule } from './features/spell/spell.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
@@ -50,15 +42,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MainWindowModule,
     /* Editors */
     SqlEditorModule,
-    CreatureModule,
     QuestModule,
-    GameobjectModule,
-    ItemModule,
-    OtherLootsModule,
-    GossipModule,
-    ConditionsModule,
-    SmartScriptsModule,
-    SpellModule,
   ],
   bootstrap: [AppComponent],
   providers: [

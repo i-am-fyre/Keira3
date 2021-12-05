@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RACE, CLASSES } from 'app/features/item/item-template/item-preview';
 import { RACES_TEXT } from '@keira-shared/constants/preview';
 
 @Injectable({ providedIn: 'root' })
@@ -24,70 +23,70 @@ export class PreviewHelperService {
     return money;
   }
 
-  public getFactionFromRace(raceMask: number): string {
-    if (raceMask === RACE.MASK_HORDE) {
-      return RACES_TEXT['-2'];
-    }
+  // public getFactionFromRace(raceMask: number): string {
+  //   if (raceMask === RACE.MASK_HORDE) {
+  //     return RACES_TEXT['-2'];
+  //   }
 
-    if (raceMask === RACE.MASK_ALLIANCE) {
-      return RACES_TEXT['-1'];
-    }
+  //   if (raceMask === RACE.MASK_ALLIANCE) {
+  //     return RACES_TEXT['-1'];
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  public getRaceString(raceMask: number): any[] {
-    // clamp to available races
-    raceMask &= RACE.MASK_ALL;
-    // available to all races (we don't display 'both factions')
-    if (!raceMask || raceMask === RACE.MASK_ALL) {
-      return null;
-    }
+  // public getRaceString(raceMask: number): any[] {
+  //   // clamp to available races
+  //   raceMask &= RACE.MASK_ALL;
+  //   // available to all races (we don't display 'both factions')
+  //   if (!raceMask || raceMask === RACE.MASK_ALL) {
+  //     return null;
+  //   }
 
-    const faction = this.getFactionFromRace(raceMask);
+  //   const faction = this.getFactionFromRace(raceMask);
 
-    if (!!faction) {
-      return [faction];
-    }
+  //   if (!!faction) {
+  //     return [faction];
+  //   }
 
-    const tmp = [];
-    let i = 1;
-    while (raceMask) {
-      if (raceMask & (1 << (i - 1))) {
-        /* istanbul ignore else */
-        if (!!i) {
-          tmp.push(i);
-        }
-        raceMask &= ~(1 << (i - 1));
-      }
-      i++;
-    }
+  //   const tmp = [];
+  //   let i = 1;
+  //   while (raceMask) {
+  //     if (raceMask & (1 << (i - 1))) {
+  //       /* istanbul ignore else */
+  //       if (!!i) {
+  //         tmp.push(i);
+  //       }
+  //       raceMask &= ~(1 << (i - 1));
+  //     }
+  //     i++;
+  //   }
 
-    return tmp;
-  }
+  //   return tmp;
+  // }
 
-  public getRequiredClass(classMask: number): number[] {
-    classMask &= CLASSES.MASK_ALL; // clamp to available classes..
+  // public getRequiredClass(classMask: number): number[] {
+  //   classMask &= CLASSES.MASK_ALL; // clamp to available classes..
 
-    if (classMask === CLASSES.MASK_ALL) {
-      // available to all classes
-      return null;
-    }
+  //   if (classMask === CLASSES.MASK_ALL) {
+  //     // available to all classes
+  //     return null;
+  //   }
 
-    const tmp = [];
-    let i = 1;
-    while (classMask) {
-      if (classMask & (1 << (i - 1))) {
-        /* istanbul ignore else */
-        if (!!i) {
-          tmp.push(i);
-        }
+  //   const tmp = [];
+  //   let i = 1;
+  //   while (classMask) {
+  //     if (classMask & (1 << (i - 1))) {
+  //       /* istanbul ignore else */
+  //       if (!!i) {
+  //         tmp.push(i);
+  //       }
 
-        classMask &= ~(1 << (i - 1));
-      }
-      i++;
-    }
+  //       classMask &= ~(1 << (i - 1));
+  //     }
+  //     i++;
+  //   }
 
-    return tmp;
-  }
+  //   return tmp;
+  // }
 }

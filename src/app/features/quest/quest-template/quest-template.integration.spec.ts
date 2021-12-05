@@ -21,7 +21,7 @@ class QuestTemplatePage extends EditorPageObject<QuestTemplateComponent> {
 describe('QuestTemplate0 integration tests', () => {
   const entry = 1234;
   const expectedFullCreateQuery =
-    'DELETE FROM `quest_template` WHERE (`entry` = 1234);\n' + 'INSERT INTO `quest_template` (`entry`, `Type`) VALUES\n' + '(1234, 0);';
+    'DELETE FROM `quest_template` WHERE (`entry` = 1234);\n' + 'INSERT INTO `quest_template` (`entry`, `Type`) VALUES (1234, 0);';
 
   beforeEach(
     waitForAsync(() => {

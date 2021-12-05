@@ -15,7 +15,7 @@ import { SelectPageObject } from '@keira-testing/select-page-object';
 import { QuestHandlerService } from '../quest-handler.service';
 
 class SelectQuestComponentPage extends SelectPageObject<SelectQuestComponent> {
-  ID_FIELD = 'ID';
+  ENTRY_FIELD = 'entry';
 }
 
 describe('SelectQuest integration tests', () => {
@@ -58,13 +58,13 @@ describe('SelectQuest integration tests', () => {
       await fixture.whenStable();
       expect(page.createInput.value).toEqual(`${component.customStartingId}`);
       page.expectNewEntityFree();
-      expect(querySpy).toHaveBeenCalledWith('SELECT MAX(ID) AS max FROM quest_template;');
+      expect(querySpy).toHaveBeenCalledWith('SELECT MAX(entry) AS max FROM quest_template;');
       expect(page.queryWrapper.innerText).toContain('SELECT * FROM `quest_template` LIMIT 50');
     }),
   );
 
   it(
-    'should correctly behave when inserting and selecting free id',
+    'should correctly behave when inserting and selecting free entry',
     waitForAsync(async () => {
       await fixture.whenStable();
       querySpy.calls.reset();
@@ -73,7 +73,7 @@ describe('SelectQuest integration tests', () => {
       page.setInputValue(page.createInput, value);
 
       expect(querySpy).toHaveBeenCalledTimes(1);
-      expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM \`quest_template\` WHERE (ID = ${value})`);
+      expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM \`quest_template\` WHERE (entry = ${value})`);
       page.expectNewEntityFree();
 
       page.clickElement(page.selectNewBtn);
@@ -94,38 +94,38 @@ describe('SelectQuest integration tests', () => {
       page.setInputValue(page.createInput, value);
 
       expect(querySpy).toHaveBeenCalledTimes(1);
-      expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM \`quest_template\` WHERE (ID = ${value})`);
+      expect(querySpy).toHaveBeenCalledWith(`SELECT * FROM \`quest_template\` WHERE (entry = ${value})`);
       page.expectEntityAlreadyInUse();
     }),
   );
 
-  for (const { testId, id, name, limit, expectedQuery } of [
+  for (const { testId, entry, name, limit, expectedQuery } of [
     {
       testId: 1,
-      id: 1200,
+      entry: 1200,
       name: `The People's Militia`,
       limit: '100',
-      expectedQuery: "SELECT * FROM `quest_template` WHERE (`ID` LIKE '%1200%') AND (`Title` LIKE '%The People\\'s Militia%') LIMIT 100",
+      expectedQuery: "SELECT * FROM `quest_template` WHERE (`entry` LIKE '%1200%') AND (`Title` LIKE '%The People\\'s Militia%') LIMIT 100",
     },
     {
       testId: 2,
-      id: '',
+      entry: '',
       name: `The People's Militia`,
       limit: '100',
       expectedQuery: "SELECT * FROM `quest_template` WHERE (`Title` LIKE '%The People\\'s Militia%') LIMIT 100",
     },
     {
       testId: 3,
-      id: 1200,
+      entry: 1200,
       name: '',
       limit: '',
-      expectedQuery: "SELECT * FROM `quest_template` WHERE (`ID` LIKE '%1200%')",
+      expectedQuery: "SELECT * FROM `quest_template` WHERE (`entry` LIKE '%1200%')",
     },
   ]) {
     it(`searching an existing entity should correctly work [${testId}]`, () => {
       querySpy.calls.reset();
-      if (id) {
-        page.setInputValue(page.searchIdInput, id);
+      if (entry) {
+        page.setInputValue(page.searchIdInput, entry);
       }
       if (name) {
         page.setInputValue(page.searchNameInput, name);
@@ -143,9 +143,9 @@ describe('SelectQuest integration tests', () => {
 
   it('searching and selecting an existing entity from the datatable should correctly work', () => {
     const results: Partial<QuestTemplate0>[] = [
-      { id: 1, Title: 'An awesome Quest 1', Type: 0, QuestLevel: 1, MinLevel: 10, Details: '' },
-      { id: 2, Title: 'An awesome Quest 2', Type: 0, QuestLevel: 2, MinLevel: 20, Details: '' },
-      { id: 3, Title: 'An awesome Quest 3', Type: 0, QuestLevel: 3, MinLevel: 30, Details: '' },
+      { entry: 1, Title: 'An awesome Quest 1', Type: 0, QuestLevel: 1, MinLevel: 10, Details: '' },
+      { entry: 2, Title: 'An awesome Quest 2', Type: 0, QuestLevel: 2, MinLevel: 20, Details: '' },
+      { entry: 3, Title: 'An awesome Quest 3', Type: 0, QuestLevel: 3, MinLevel: 30, Details: '' },
     ];
     querySpy.calls.reset();
     querySpy.and.returnValue(of(results));
@@ -164,6 +164,6 @@ describe('SelectQuest integration tests', () => {
 
     expect(navigateSpy).toHaveBeenCalledTimes(1);
     expect(navigateSpy).toHaveBeenCalledWith(['quest/quest-template']);
-    page.expectTopBarEditing(results[1].ID, results[1].Title);
+    page.expectTopBarEditing(results[1].entry, results[1].Title);
   });
 });

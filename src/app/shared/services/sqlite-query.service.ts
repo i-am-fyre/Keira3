@@ -6,9 +6,7 @@ import { SqliteService } from '@keira-shared/services/sqlite.service';
 import { ConfigService } from '@keira-shared/services/config.service';
 import { TableRow } from '@keira-types/general';
 import { QueryService } from '@keira-shared/services/query.service';
-import { Lock } from '@keira-types/lock.type';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { ItemExtendedCost } from '@keira-shared/types/item-extended-cost.type';
 
 @Injectable({
   providedIn: 'root',
@@ -117,15 +115,15 @@ export class SqliteQueryService extends QueryService {
     );
   }
 
-  getLockById(id: string | number): Promise<Lock[]> {
-    return this.queryToPromiseCached<Lock>('getLockById', String(id), `SELECT * FROM lock WHERE id = ${id}`);
-  }
+  // getLockById(id: string | number): Promise<Lock[]> {
+  //   return this.queryToPromiseCached<Lock>('getLockById', String(id), `SELECT * FROM lock WHERE id = ${id}`);
+  // }
 
-  getItemExtendedCost(IDs: number[]): Promise<ItemExtendedCost[]> {
-    return this.queryToPromiseCached<ItemExtendedCost>(
-      'getItemExtendedCost',
-      String(IDs.join(',')),
-      `SELECT * FROM item_extended_cost WHERE id IN (${IDs.join(',')})`,
-    );
-  }
+  // getItemExtendedCost(IDs: number[]): Promise<ItemExtendedCost[]> {
+  //   return this.queryToPromiseCached<ItemExtendedCost>(
+  //     'getItemExtendedCost',
+  //     String(IDs.join(',')),
+  //     `SELECT * FROM item_extended_cost WHERE id IN (${IDs.join(',')})`,
+  //   );
+  // }
 }

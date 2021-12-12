@@ -11,6 +11,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { toastrConfig } from '@keira-config/toastr.config';
 import { EditorButtonsModule } from '@keira-shared/modules/editor-buttons/editor-buttons.module';
+import { FlagsSelectorModule } from '@keira-shared/modules/selectors/flags-selector/flags-selector.module';
 import { QuestPreviewComponent } from './quest-preview/quest-preview.component';
 import { QuestPreviewService } from './quest-preview/quest-preview.service';
 import { QuestTemplateComponent } from './quest-template/quest-template.component';
@@ -37,6 +38,7 @@ const components = [QuestTemplateComponent, QuestPreviewComponent];
     TooltipModule,
     ToastrModule,
     EditorButtonsModule,
+    FlagsSelectorModule,
     QuestSelectorModule,
     IconModule,
     PerfectScrollbarModule,

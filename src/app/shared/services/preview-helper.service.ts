@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RACES_TEXT } from '@keira-shared/constants/preview';
+import { RACE, CLASSES, RACES_TEXT } from '@keira-shared/constants/preview';
 
 @Injectable({ providedIn: 'root' })
 export class PreviewHelperService {
@@ -23,70 +23,73 @@ export class PreviewHelperService {
     return money;
   }
 
-  // public getFactionFromRace(raceMask: number): string {
-  //   if (raceMask === RACE.MASK_HORDE) {
-  //     return RACES_TEXT['-2'];
-  //   }
+  public getFactionFromRace(raceMask: number): string {
 
-  //   if (raceMask === RACE.MASK_ALLIANCE) {
-  //     return RACES_TEXT['-1'];
-  //   }
+    
 
-  //   return null;
-  // }
+    if (raceMask === RACE.MASK_HORDE_0) {
+      return RACES_TEXT['-2'];
+    }
 
-  // public getRaceString(raceMask: number): any[] {
-  //   // clamp to available races
-  //   raceMask &= RACE.MASK_ALL;
-  //   // available to all races (we don't display 'both factions')
-  //   if (!raceMask || raceMask === RACE.MASK_ALL) {
-  //     return null;
-  //   }
+    if (raceMask === RACE.MASK_ALLIANCE_0) {
+      return RACES_TEXT['-1'];
+    }
 
-  //   const faction = this.getFactionFromRace(raceMask);
+    return null;
+  }
 
-  //   if (!!faction) {
-  //     return [faction];
-  //   }
+  public getRaceString(raceMask: number): any[] {
+    // clamp to available races
+    raceMask &= RACE.MASK_ALL_0;
+    // available to all races (we don't display 'both factions')
+    if (!raceMask || raceMask === RACE.MASK_ALL_0) {
+      return null;
+    }
 
-  //   const tmp = [];
-  //   let i = 1;
-  //   while (raceMask) {
-  //     if (raceMask & (1 << (i - 1))) {
-  //       /* istanbul ignore else */
-  //       if (!!i) {
-  //         tmp.push(i);
-  //       }
-  //       raceMask &= ~(1 << (i - 1));
-  //     }
-  //     i++;
-  //   }
+    const faction = this.getFactionFromRace(raceMask);
 
-  //   return tmp;
-  // }
+    if (!!faction) {
+      return [faction];
+    }
 
-  // public getRequiredClass(classMask: number): number[] {
-  //   classMask &= CLASSES.MASK_ALL; // clamp to available classes..
+    const tmp = [];
+    let i = 1;
+    while (raceMask) {
+      if (raceMask & (1 << (i - 1))) {
+        /* istanbul ignore else */
+        if (!!i) {
+          tmp.push(i);
+        }
+        raceMask &= ~(1 << (i - 1));
+      }
+      i++;
+    }
 
-  //   if (classMask === CLASSES.MASK_ALL) {
-  //     // available to all classes
-  //     return null;
-  //   }
+    return tmp;
+  }
 
-  //   const tmp = [];
-  //   let i = 1;
-  //   while (classMask) {
-  //     if (classMask & (1 << (i - 1))) {
-  //       /* istanbul ignore else */
-  //       if (!!i) {
-  //         tmp.push(i);
-  //       }
+  public getRequiredClass(classMask: number): number[] {
+    classMask &= CLASSES.MASK_ALL; // clamp to available classes..
 
-  //       classMask &= ~(1 << (i - 1));
-  //     }
-  //     i++;
-  //   }
+    if (classMask === CLASSES.MASK_ALL) {
+      // available to all classes
+      return null;
+    }
 
-  //   return tmp;
-  // }
+    const tmp = [];
+    let i = 1;
+    while (classMask) {
+      if (classMask & (1 << (i - 1))) {
+        /* istanbul ignore else */
+        if (!!i) {
+          tmp.push(i);
+        }
+
+        classMask &= ~(1 << (i - 1));
+      }
+      i++;
+    }
+
+    return tmp;
+  }
 }

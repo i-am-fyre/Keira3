@@ -62,12 +62,15 @@ export class QuestPreviewService {
   get minLevel(): string {
     return String(this.questTemplate.MinLevel);
   }
-  // get side(): string {
-  //   return this.helperService.getFactionFromRace(this.questTemplate.RequiredRaces);
-  // }
-  // get races(): number[] {
-  //   return this.helperService.getRaceString(this.questTemplate.RequiredRaces);
-  // }
+  get side(): string {
+    return this.helperService.getFactionFromRace(this.questTemplate.RequiredRaces);
+  }
+  get races(): number[] {
+    return this.helperService.getRaceString(this.questTemplate.RequiredRaces);
+  }
+  get classes(): number[] {
+    return this.helperService.getRequiredClass(this.questTemplate.RequiredClasses);
+  }
   // get sharable(): string {
   //   return this.questTemplate.QuestFlags & QUEST_FLAG_SHARABLE ? 'Sharable' : 'Not sharable';
   // }
@@ -80,12 +83,16 @@ export class QuestPreviewService {
   // get objectiveText(): string {
   //   return this.questTemplate.Objectives;
   // }
-  // get rewardMoney(): number {
-  //   return this.questTemplate.RewOrReqMoney;
-  // }
+  get rewardMoney(): number {
+    return this.questTemplate.RewOrReqMoney;
+  }
   // get RewMoneyMaxLevel(): number {
   //   return this.questTemplate.RewMoneyMaxLevel;
   // }
+
+  get maxLevel(): string {
+    return String(this.questTemplate.MaxLevel);
+  }
 
   // Item Quest Starter
   get questGivenByItem$(): Promise<string> {

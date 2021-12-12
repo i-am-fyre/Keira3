@@ -4,32 +4,34 @@
       <h5 id="title" *ngIf="!!service.title">{{ service.title }}</h5>
       <!-- <p id="unavailable" *ngIf="service.isUnavailable()" class="text-center font-weight-bold red">Unavailable</p> -->
       <p id="level" *ngIf="!!service.level">Level: {{ service.level }}</p>
-      <!-- <p id="minlevel" *ngIf="!!service.minLevel">
+      <!-- MaxLevel may not be applicable for MaNGOS -- TBD -->
+      <p id="minlevel" *ngIf="!!service.minLevel">
         Req. level: {{ service.minLevel }} <span *ngIf="showMaxLevel">- {{ service.maxLevel }}</span>
-      </p> -->
-      <!-- <p id="required-money" *ngIf="service.rewardMoney < 0">
+      </p>
+      <p id="required-money" *ngIf="service.rewardMoney < 0">
         Req. money: <span [innerHTML]="helper.formatMoney(-service.rewardMoney)"></span>
-      </p> -->
+      </p>
       <!-- <p id="type" *ngIf="!!type">
         Type:
         <span *ngIf="this.service.periodicQuest; let period">{{ period }} </span>
         <span *ngIf="questInfo; let qInfo">{{ qInfo }}</span>
       </p> -->
-      <!-- <p id="side" *ngIf="!!service.side">Side: &nbsp;<span class="side {{ service.side.toLowerCase() }}"></span> {{ service.side }}</p> -->
-      <!-- <p id="races" *ngIf="showRaces" class="list-req">
+      <p id="side" *ngIf="!!service.side">Side: &nbsp;<span class="side {{ service.side.toLowerCase() }}"></span> {{ service.side }}</p>
+      <p id="races" *ngIf="showRaces" class="list-req">
         Races:
         <span *ngFor="let r of service.races">
           <img [src]="'assets/img/race/' + r + '-0.gif'" />
           {{ service.RACES_TEXT[r] }} &nbsp;
         </span>
       </p>
-      <p id="classes" *ngIf="showClasses" class="list-req">
+      <!-- <p id="classes" *ngIf="showClasses" class="list-req">
         Classes:
         <span *ngFor="let c of service.classes" [ngClass]="'c' + c">
           <img [src]="'assets/img/class/' + c + '.gif'" />
           {{ service.CLASSES_TEXT[c] }} &nbsp;
         </span>
-      </p>
+      </p> -->
+      <!-- 
       <p id="requiredSkill" *ngIf="service.requiredSkill$ | async as skill">
         Profession:
         <keira-icon

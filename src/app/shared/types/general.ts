@@ -38,6 +38,7 @@ export interface VersionRow extends TableRow {
 
 export interface Flag {
   bit: number; // the position (index) of the bit
+  core: number; // the lowest core that the bit is available in
   name: string;
 }
 

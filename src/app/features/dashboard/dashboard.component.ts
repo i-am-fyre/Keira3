@@ -18,7 +18,6 @@ export var core;
 export class DashboardComponent extends SubscriptionHandler implements OnInit {
   databaseCore: MCore;
   databaseVersions: VersionRow;
-  // core: number;
   error = false;
   public readonly KEIRA_VERSION = packageInfo.version;
   public readonly PAYPAL_DONATE_URL = PAYPAL_DONATE_URL;

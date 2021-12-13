@@ -134,6 +134,15 @@
             <input [formControlName]="'RequiredRaces'" id="RequiredRaces" type="number" class="form-control form-control-sm" />
           </div>
 
+          <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
+            <label class="control-label" for="RequiredClasses">RequiredClasses</label>
+            <keira-flags-selector-btn
+              [control]="editorService.form.controls.RequiredClasses"
+              [config]="{ flags: ALLOWABLE_CLASSES, name: 'RequiredClasses', core: CORE}" >
+            </keira-flags-selector-btn>
+            <input [formControlName]="'RequiredClasses'" id="RequiredClasses" type="number" class="form-control form-control-sm" />
+          </div>
+
           <!-- <div class="form-group col-12 col-sm-6 col-md-5 col-lg-4 col-xl-2">
             <label class="control-label" for="Unknown0">Unknown0</label>
             <input [formControlName]="'Unknown0'" id="Unknown0" type="number" class="form-control form-control-sm" />

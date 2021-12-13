@@ -5,6 +5,7 @@ import { QuestTemplate0 } from '@keira-types/quest-template.type';
 import { QuestTemplateService } from './quest-template.service';
 import { QuestHandlerService } from '../quest-handler.service';
 import { ALLOWABLE_RACES } from '@keira-constants/flags/allowable-races';
+import { ALLOWABLE_CLASSES } from '@keira-shared/constants/flags/allowable-classes';
 import { QUEST_FLAGS } from '@keira-constants/flags/quest-flags';
 import { QUEST_TYPE } from '@keira-constants/options/quest-type';
 import { QuestPreviewService } from '../quest-preview/quest-preview.service';
@@ -20,6 +21,7 @@ export class QuestTemplateComponent extends SingleRowEditorComponent<QuestTempla
   public readonly QUEST_FLAGS = QUEST_FLAGS;
   public readonly QUEST_TYPE = QUEST_TYPE;
   public readonly ALLOWABLE_RACES = ALLOWABLE_RACES;
+  public readonly ALLOWABLE_CLASSES = ALLOWABLE_CLASSES;
   public readonly QUEST_INFO = QUEST_INFO;
   public readonly CORE = core;
 

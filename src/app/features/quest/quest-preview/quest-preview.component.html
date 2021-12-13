@@ -24,13 +24,13 @@
           {{ service.RACES_TEXT[r] }} &nbsp;
         </span>
       </p>
-      <!-- <p id="classes" *ngIf="showClasses" class="list-req">
+      <p id="classes" *ngIf="showClasses" class="list-req">
         Classes:
         <span *ngFor="let c of service.classes" [ngClass]="'c' + c">
           <img [src]="'assets/img/class/' + c + '.gif'" />
           {{ service.CLASSES_TEXT[c] }} &nbsp;
         </span>
-      </p> -->
+      </p>
       <!-- 
       <p id="requiredSkill" *ngIf="service.requiredSkill$ | async as skill">
         Profession:

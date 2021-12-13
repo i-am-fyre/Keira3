@@ -80,14 +80,14 @@
       <!-- <p *ngIf="service.isRepeatable()">Repeatable</p> -->
       <!-- <p>{{ service.sharable }}</p> -->
 
-      <!-- <p *ngIf="service.difficultyLevels; let difficulty">
+      <p *ngIf="service.difficultyLevels; let difficulty">
         Difficulty:
         <span class="r0" *ngIf="!!difficulty.red"> {{ difficulty.red }} </span>
         <span class="r1" *ngIf="!!difficulty.orange"> {{ difficulty.orange }} </span>
         <span class="r2" *ngIf="!!difficulty.yellow"> {{ difficulty.yellow }} </span>
         <span class="r3" *ngIf="!!difficulty.green"> {{ difficulty.green }} </span>
         <span class="r4" *ngIf="!!difficulty.grey"> {{ difficulty.grey }} </span>
-      </p> -->
+      </p>
 
       <!-- <p *ngIf="!!service.SrcItemId" id="provided-item">
         Provided item:<br />

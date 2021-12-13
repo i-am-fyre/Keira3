@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RACE, CLASSES, RACES_TEXT } from '@keira-shared/constants/preview';
+import { core } from 'app/features/dashboard/dashboard.component';
 
 @Injectable({ providedIn: 'root' })
 export class PreviewHelperService {
@@ -24,14 +25,30 @@ export class PreviewHelperService {
   }
 
   public getFactionFromRace(raceMask: number): string {
+    let horde = 0x000;
+    let alliance = 0x000;    
 
-    
+    switch (core) {
+      case 0:
+        horde = RACE.MASK_HORDE_0;
+        alliance = RACE.MASK_ALLIANCE_0;
+        break;
+      case 1:
+      case 2:
+        horde = RACE.MASK_HORDE_1_2;
+        alliance = RACE.MASK_ALLIANCE_1_2;
+        break;
+      case 3:
+        horde = RACE.MASK_HORDE_3;
+        alliance = RACE.MASK_ALLIANCE_3;
+        break;
+    }
 
-    if (raceMask === RACE.MASK_HORDE_0) {
+    if (raceMask === horde) {
       return RACES_TEXT['-2'];
     }
 
-    if (raceMask === RACE.MASK_ALLIANCE_0) {
+    if (raceMask === alliance) {
       return RACES_TEXT['-1'];
     }
 
@@ -39,10 +56,25 @@ export class PreviewHelperService {
   }
 
   public getRaceString(raceMask: number): any[] {
+    let all = 0x000;
+
+    switch (core) {
+      case 0:
+        all = RACE.MASK_ALL_0;
+        break;
+      case 1:
+      case 2:
+        all = RACE.MASK_ALL_1_2;
+        break;
+      case 3:
+        all = RACE.MASK_ALL_3;
+        break;
+    }
+
     // clamp to available races
-    raceMask &= RACE.MASK_ALL_0;
+    raceMask &= all;
     // available to all races (we don't display 'both factions')
-    if (!raceMask || raceMask === RACE.MASK_ALL_0) {
+    if (!raceMask || raceMask === all) {
       return null;
     }
 

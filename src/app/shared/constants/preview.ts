@@ -41,7 +41,7 @@ export enum RACE {
   MASK_HORDE_3 = 0x3b2,
   MASK_ALL_0 = 0x0ff,
   MASK_ALL_1_2 = 0x6ff,
-  MASK_ALL_3 = 0x1ff2e7,
+  MASK_ALL_3 = 0x2007ff,
 }
 // ChrClasses.dbc
 export const CLASSES_TEXT = [
@@ -72,7 +72,18 @@ export const RACES_TEXT = {
   6: 'Tauren',
   7: 'Gnome',
   8: 'Troll',
-  9: null,
+  9: 'Goblin',
   10: 'Blood Elf',
   11: 'Draenei',
+  12: 'Fel Orc',
+  13: 'Naga',
+  14: 'Broken',
+  15: 'Skeleton',
+  16: 'Vrykul',
+  17: 'Tuskarr',
+  18: 'Forest Troll',
+  19: 'Taunka',
+  20: 'Northrend Skeleton',
+  21: 'Ice Troll',
+  22: 'Worgen',
 };

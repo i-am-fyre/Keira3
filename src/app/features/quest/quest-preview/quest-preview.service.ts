@@ -71,9 +71,9 @@ export class QuestPreviewService {
   get classes(): number[] {
     return this.helperService.getRequiredClass(this.questTemplate.RequiredClasses);
   }
-  // get sharable(): string {
-  //   return this.questTemplate.QuestFlags & QUEST_FLAG_SHARABLE ? 'Sharable' : 'Not sharable';
-  // }
+  get sharable(): string {
+    return this.questTemplate.QuestFlags & QUEST_FLAG_SHARABLE ? 'Sharable' : 'Not sharable';
+  }
   // get SrcItemId(): number {
   //   return this.questTemplate.SrcItemId;
   // }

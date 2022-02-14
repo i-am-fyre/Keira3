@@ -22,12 +22,12 @@
     "!tsconfig.json",
     "!tslint.json"
   ],
-  // "win": {
-  //   "icon": "dist",
-  //   "target": [
-  //     "portable"
-  //   ]
-  // },
+  "win": {
+    "icon": "dist",
+    "target": [
+      "portable"
+    ]
+  },
   // "mac": {
   //   "icon": "dist",
   //   "target": [
